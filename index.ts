@@ -53,21 +53,72 @@ async function main() {
   //
   //CREATE
   // Criar um post
-  const post = await prisma.post.create({
+  // const post = await prisma.post.create({
+  //   data: {
+  //     title: "Meu primeiro post",
+  //     content: "Este é o conteúdo do meu primeiro post.",
+  //     author: {
+  //       connect: {
+  //         id: 2,
+  //         // email: "jose@gmail.com",
+  //       },
+  //     },
+  //   },
+  // });
+  // console.log("Post criado:", post);
+  //
+  //
+  // --------- Fazer a mesma coisa com Os paises realicionados a vários usuário ---------
+  //
+  //
+  //CREATE
+  // Criar um país
+  // const argentina = await prisma.country.create({
+  //   data: {
+  //     name: "Argentina",
+  //   },
+  // });
+  // // Criar um usuário associado ao país
+  // const user = await prisma.user.create({
+  //   data: {
+  //     name: "Carlos",
+  //     email: "carlos@exemplo.com",
+  //     country: {
+  //       connect: { id: argentina.id }, // Associa o usuário ao país
+  //     },
+  //   },
+  // });
+  //
+  //
+  //GET BY COUNTRY
+  // const usuariosArgentina = await prisma.user.findMany({
+  //   where: {
+  //     country: {
+  //       name: "Argentina", // Filtra por nome do país
+  //     },
+  //   },
+  //   include: {
+  //     country: true, // Inclui os dados do país no resultado
+  //   },
+  // });
+
+  // console.log(usuariosArgentina);
+  //
+  //
+  //UPDATE CONTRY BY USER
+  await prisma.user.update({
+    where: { email: "carlos@exemplo.com" },
     data: {
-      title: "Meu primeiro post",
-      content: "Este é o conteúdo do meu primeiro post.",
-      author: {
-        connect: {
-          id: 2,
-          // email: "jose@gmail.com",
-        },
+      country: {
+        connect: { name: "Brasil" }, // Muda o país do usuário
       },
     },
   });
-  console.log("Post criado:", post);
 }
 
 main()
   .catch((e) => console.error(e))
   .finally(async () => await prisma.$disconnect());
+
+//REMINDER: Alias para atualizar as migrations
+//yarn prisma-migrate-update -- add_country_relation

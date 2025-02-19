@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prisma-init": "prisma init",
     "prisma-migrate": "prisma migrate dev --name init",
-    "prisma-migrate-update": "prisma migrate dev --name add_address_field",
+    "prisma-migrate-update": "prisma migrate dev --name",
     "server:run": "ts-node index.ts",
     "prisma-studio": "prisma studio"
   },

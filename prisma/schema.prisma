@@ -8,12 +8,20 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
   // address String?  // Novo campo (opcional)
-  address Json?  // Novo campo (opcional)
-  posts Post[]
+  address   Json? // Novo campo (opcional)
+  posts     Post[]
+  countryId Int? // Campo para a chave estrangeira (opcional se o país não for obrigatório)
+  country   Country? @relation(fields: [countryId], references: [id]) // Relação com Country
+}
+
+model Country {
+  id    Int    @id @default(autoincrement())
+  name  String @unique // Garante que cada país tenha um nome único (ex: "Brasil", "Argentina")
+  users User[] // Lista de usuários associados ao país
 }
 
 model Post {
