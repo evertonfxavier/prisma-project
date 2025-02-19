@@ -16,12 +16,16 @@ async function main() {
 
   //UPDATE
   //Atualizar endereço de um usuário:
-  // await prisma.user.update({
-  //   where: { email: "jose@gmail.com" },
-  //   data: {
-  //     address: "Avenida Principal, 456",
-  //   },
-  // });
+  await prisma.user.update({
+    where: { email: "jose@gmail.com" },
+    data: {
+      address: {
+        rua: "Rua das Pedras",
+        numero: 33,
+        cidade: "São Carlos",
+      },
+    },
+  });
 
   //GET
   //Buscar usuários por endereço:
@@ -36,11 +40,11 @@ async function main() {
 
   //DELETE
   //Excluir um usuário por e-mail:
-  await prisma.user.delete({
-    where: {
-      email: "maria@exemplo.com",
-    },
-  });
+  // await prisma.user.delete({
+  //   where: {
+  //     email: "maria@exemplo.com",
+  //   },
+  // });
 
   //GET ALL
   // Buscar todos os usuários
